@@ -1,15 +1,31 @@
 class Department {
-  name: string;
+
+
+  // private name: string;
+  // private id: string;
+
 
   //table, which contains only string values
   private employees: string[] = [];
 
-  constructor(n: string) {
-    this.name = n;
+
+
+  // constructor(n: string, id: string) {
+  //   this.name = n;
+  //   this.id = id;
+  // }
+
+
+  //SHORT INITIALIZATION
+  // with below line it's not necessery to init variables "directly in class", we can
+  // do this in constructor, but we need to provide name of variable and type
+  constructor(private name: string, private id: string) {
+    // this.name = n;
+    // this.id = id;
   }
 
   describe(this: Department) {
-    console.log('Department: ' + this.name);
+    console.log('Department: ' + this.name + this.id);
   }
 
   addEmployee(employee: string) {
@@ -22,10 +38,10 @@ class Department {
   }
 }
 
-const accounting = new Department('Accounting');
+const accounting = new Department('Accounting', 'd1');
 
 accounting.addEmployee('The Guy');
-accounting.addEmployee('The Girl')
+accounting.addEmployee('The Girl');
 
 //adding employee without addEmployee function
 // accounting.employees[2] = 'The next one'
