@@ -3,7 +3,7 @@ class Department {
   // private id: string;
 
   //table, which contains only string values
-  private employees: string[] = [];
+  protected employees: string[] = [];
 
   // constructor(n: string, id: string) {
   //   this.name = n;
@@ -40,17 +40,38 @@ class ITDepartment extends Department {
   }
 }
 
-const accounting = new Department('Accounting', 'd1');
-const it = new ITDepartment('d2', ['Me', 'Also Me'])
+class Accounting extends Department {
+  constructor(id: string, private reports: string[]) {
+    super('Accounting', id);
+  }
 
-accounting.addEmployee('The Guy');
+  addEmployee(employee: string) {
+    if (employee === 'Rafal') {
+      return;
+    }
+    //we can do this, because PRIVATE was changed to PROTECTED
+    this.employees.push(employee);
+  }
+
+  addReport(content: string) {
+    this.reports.push(content);
+  }
+
+  printReports() {
+    console.log(this.reports);
+  }
+}
+
+const it = new ITDepartment('d2', ['Me', 'Also Me']);
+const accounting = new Accounting('Accounting', ['Report1', 'Report2']);
+// accounting.addEmployee('The Guy');
 it.addEmployee('The Girl');
 //adding employee without addEmployee function
 // accounting.employees[2] = 'The next one'
 // ... and it's not working, if we add 'private' before employees table initialization !!!
-accounting.describe();
+// accounting.describe();
 
-accounting.printEmployeeInfo();
+// accounting.printEmployeeInfo();
 
 // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
 
