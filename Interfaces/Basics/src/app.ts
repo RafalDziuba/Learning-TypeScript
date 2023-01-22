@@ -41,8 +41,25 @@ class ITDepartment extends Department {
 }
 
 class Accounting extends Department {
+  private lastReport: string;
+
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error('No report found.');
+  }
+
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error('Report is null');
+    }
+    this.addReport(value);
+  }
+
   constructor(id: string, private reports: string[]) {
     super('Accounting', id);
+    this.lastReport = reports[0];
   }
 
   addEmployee(employee: string) {
@@ -55,6 +72,7 @@ class Accounting extends Department {
 
   addReport(content: string) {
     this.reports.push(content);
+    this.lastReport = content;
   }
 
   printReports() {
@@ -76,6 +94,10 @@ it.addEmployee('The Girl');
 // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
 
 console.log(it);
+console.log(accounting.mostRecentReport);
+
+//we can do this because of SETTER
+accounting.mostRecentReport = 'Added from setter'
 // accountingCopy.describe();
 
-// TO DO: ADD ACCOUNTING DEPARTMENT
+// GETTERS AND SETTERS AND USEFUL WHEN WE WANT TO ADD OR GET PROPERTY WITH SOME EXTRA LOGIC
