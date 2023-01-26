@@ -1,4 +1,5 @@
 class Department {
+
   // private name: string;
   // private id: string;
 
@@ -16,6 +17,15 @@ class Department {
   constructor(private name: string, private id: string) {
     // this.name = n;
     // this.id = id;
+
+    //CANE USE STATIC METHODS / PROPERTIES HERE
+  }
+
+  //we can access createEmployee method without instantiating class, because of STATIC keyword
+  // SAME FOR VARIABLES
+  
+  static createEmployee(name: string) {
+    return { name: name };
   }
 
   describe(this: Department) {
@@ -80,6 +90,8 @@ class Accounting extends Department {
   }
 }
 
+const employee1 = Department.createEmployee('Rafal');
+
 const it = new ITDepartment('d2', ['Me', 'Also Me']);
 const accounting = new Accounting('Accounting', ['Report1', 'Report2']);
 // accounting.addEmployee('The Guy');
@@ -97,7 +109,7 @@ console.log(it);
 console.log(accounting.mostRecentReport);
 
 //we can do this because of SETTER
-accounting.mostRecentReport = 'Added from setter'
+accounting.mostRecentReport = 'Added from setter';
 // accountingCopy.describe();
 
 // GETTERS AND SETTERS AND USEFUL WHEN WE WANT TO ADD OR GET PROPERTY WITH SOME EXTRA LOGIC
